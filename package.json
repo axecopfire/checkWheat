@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "nes.css": "^2.3.0",
+    "parcel-bundler": "^1.12.4"
+  },
+  "name": "temp",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "devDependencies": {},
+  "scripts": {
+    "dev": "parcel src/pages/*.pug",
+    "build": "parcel build src/pages/*.pug"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
