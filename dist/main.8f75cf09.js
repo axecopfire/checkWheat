@@ -118,10 +118,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"../js/main.js":[function(require,module,exports) {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var App =
+/*#__PURE__*/
+function () {
+  function App() {
+    _classCallCheck(this, App);
+  }
+
+  _createClass(App, [{
+    key: "render",
+    value: function render() {
+      var div = document.createElement("div");
+      div.innerHTML = "This was created with stuff JS";
+      return div;
+    }
+  }]);
+
+  return App;
+}();
+
+var Conversation = function Conversation() {
+  _classCallCheck(this, Conversation);
+
+  this.kirby = {};
+  this.otherGuy = {};
+};
+
+var Clock =
+/*#__PURE__*/
+function () {
+  function Clock() {
+    var _this = this;
+
+    _classCallCheck(this, Clock);
+
+    this.time = new Date();
+    this.render();
+    setInterval(function () {
+      return _this.tickClock();
+    }, 1000);
+  }
+
+  _createClass(Clock, [{
+    key: "tickClock",
+    value: function tickClock() {
+      this.render();
+      this.time = new Date();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      document.getElementById("clock").textContent = this.time;
+    }
+  }]);
+
+  return Clock;
+}();
+
 window.onload = function () {
-  var div = document.createElement("div");
-  div.innerHTML = "This was created with ES6 JS";
-  document.body.appendChild(div);
+  var app = new App();
+  new Clock();
+  new Conversation();
+  document.body.appendChild(app.render());
 };
 },{}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -151,7 +215,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59863" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58078" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
