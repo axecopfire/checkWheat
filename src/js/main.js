@@ -9,7 +9,6 @@ class App {
 class Conversation {
   constructor() {
     this.root = document.getElementById("conversation");
-    this.scrolled = false;
     this.charactersList = [
       "nes-mario",
       "nes-ash",
@@ -58,7 +57,6 @@ class Conversation {
     this.activeCharacters = [];
     this.activeConversation = [];
     this.counter = 0;
-    this.setupScroll();
     this.setConvo();
     this.render();
     this.simulateConvo(0);
@@ -69,17 +67,6 @@ class Conversation {
     this.activeConversation = [];
     this.counter = 0;
     this.init();
-  }
-  setupScroll() {
-    addEventListener("scroll", () => {
-      this.scrolled = true;
-    });
-  }
-  updateScroll() {
-  //   console.log('stuff?', this.scrolled)
-  //   if (!this.scrolled) {
-  //     this.root.scrollTop = this.root.scrollHeight;
-  //   }
   }
   setConvo() {
     const spot = Math.floor(Math.random() * this.dialog.length);
@@ -154,7 +141,6 @@ class Conversation {
   render() {
     this.messageList.forEach((msg) => {
       this.root.prepend(msg);
-      this.updateScroll();
     });
   }
 }

@@ -1,6 +1,6 @@
 html
 	font-family: "Press Start 2P"
-	
+
 h1
 	color: tomato
 
@@ -8,10 +8,10 @@ main
 	max-width: 1000px
 	display: block
 	margin: 20px auto
-div
-	border: 1px solid lightgray
-	display: inline-block
-	padding: 20px
+// div
+// 	border: 1px solid lightgray
+// 	display: inline-block
+// 	padding: 20px
 
 .message-list
 	>.custom
@@ -28,9 +28,52 @@ div
 .nes-container
 	margin: 30px auto
 
-
 #conversation
 	height: 500px
 	overflow: scroll
 	display: flex
 	flex-direction: column-reverse
+
+#computer
+	background: khaki
+	.img-container
+		position: relative
+		overflow: hidden
+		// border: none
+		border-radius: 30px
+		margin: 0 auto
+		display: block
+		width: 80%
+		max-height: 500px
+	img
+		margin: 0
+		width: 100%
+		animation: hum 1s ease-in-out infinite alternate
+	.overlay
+		position: absolute
+		top: -10px
+		right: -10px
+		bottom: -10px
+		left: -10px
+		background: repeating-linear-gradient(rgba(#fff, .25) 0, transparent 1px, transparent 3px, rgba(#121212, .25) 4px)
+		width: 100vw
+		height: 200vh
+		pointer-events: none
+		z-index: 999
+		animation: buzz 1ms linear infinite
+		mix-blend-mode: hard-light
+
+@keyframes hum
+	0%
+		-webkit-filter: saturate(1)
+		filter: saturate(1)
+	100%
+		-webkit-filter: saturate(1.2)
+		filter: saturate(1.2)
+
+@keyframes buzz
+	0%
+		transform: translateY(0)
+
+	100%
+		transform: translateY(100vh)
