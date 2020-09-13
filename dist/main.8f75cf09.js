@@ -143,25 +143,123 @@ function () {
   return App;
 }();
 
-var Conversation = function Conversation() {
-  _classCallCheck(this, Conversation);
+var Conversation =
+/*#__PURE__*/
+function () {
+  function Conversation() {
+    _classCallCheck(this, Conversation);
 
-  this.kirby = {};
-  this.otherGuy = {};
-};
+    this.messageList = []; // rendered messagelist
+
+    this.activeCharacters = [];
+    this.activeConversation = [];
+    this.counter = 0;
+    this.charactersList = ["nes-mario", "nes-ash", "nes-pokeball", "nes-bulbasaur", "nes-charmander", "nes-squirtle", "nes-kirby"];
+    this.dialog = [["Have you heard about this new game?", "Oh my gosh. Haven't we all?", "This game is everywhere."], ["Hey how did you end up here?", "I'm not sure. Last thing I remember was...", "I don't think we're supposed to be here.", "You might be right but until I'm told otherwise. I think I'll stay"], ["Hey what are you supposed to be?", "Are you talking to me?", "There's no one else here for me to be talking to.", "Well this is awkward."], ["Is there a moderator here?", "Hi there, how can I help?", "I'm looking for how to checkWheat. It doesn't say anywhere on here", "Yeah, its simple enough. When it asks what you want to do. Just type in checkWheat", "Whoa thats awesome! Thanks!"], ["I've spent about 40 hours playing this game. I love it!", "You should really keep your opinions to yourself.", "I won't be moderated!", "You're going to get kicked."]];
+    this.setConvo();
+    this.render();
+    this.simulateConvo(0);
+  }
+
+  _createClass(Conversation, [{
+    key: "setConvo",
+    value: function setConvo() {
+      var _this = this;
+
+      var spot = Math.floor(Math.random() * this.dialog.length);
+
+      var character = function character() {
+        return _this.charactersList[Math.floor(Math.random() * _this.charactersList.length)];
+      };
+
+      this.activeConversation = this.dialog[spot];
+      this.activeCharacters = [character(), character()];
+    }
+  }, {
+    key: "simulateConvo",
+    value: function simulateConvo() {
+      var _this2 = this;
+
+      if (this.counter >= this.activeConversation.length - 1) {
+        return;
+      }
+
+      var message = this.createMessage(this.activeConversation[this.counter], this.counter);
+      this.addMessage(message).then(function () {
+        _this2.counter++;
+
+        _this2.render();
+
+        _this2.simulateConvo();
+      }).catch(function (e) {
+        return console.error(e);
+      });
+    }
+  }, {
+    key: "addMessage",
+    value: function addMessage(message) {
+      var _this3 = this;
+
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          _this3.messageList.push(message);
+
+          resolve();
+        }, 2000);
+      });
+    }
+  }, {
+    key: "createMessage",
+    value: function createMessage(content, counter) {
+      var p = document.createElement("p");
+      var i = document.createElement("i");
+      var section = document.createElement("section");
+      var div = document.createElement("div");
+      p.textContent = content;
+
+      if (counter % 2 !== 0) {
+        div.classList.add("nes-balloon", "from-right", "is-dark");
+        section.classList.add("message", "custom", "-right");
+        i.classList.add(this.activeCharacters[1]);
+      } else {
+        i.classList.add(this.activeCharacters[0]);
+        div.classList.add("nes-balloon", "from-left", "is-dark");
+        section.classList.add("message", "custom", "-left");
+      }
+
+      div.appendChild(p);
+      section.appendChild(div);
+      section.appendChild(i);
+      return section;
+    } // for each item from the message list
+    // determine if its left or right
+    // determine which character to use
+
+  }, {
+    key: "render",
+    value: function render() {
+      var root = document.getElementById("conversation");
+      this.messageList.forEach(function (msg) {
+        root.appendChild(msg);
+      });
+    }
+  }]);
+
+  return Conversation;
+}();
 
 var Clock =
 /*#__PURE__*/
 function () {
   function Clock() {
-    var _this = this;
+    var _this4 = this;
 
     _classCallCheck(this, Clock);
 
     this.time = new Date();
     this.render();
     setInterval(function () {
-      return _this.tickClock();
+      return _this4.tickClock();
     }, 1000);
   }
 
@@ -215,7 +313,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58078" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56432" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
