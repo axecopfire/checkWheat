@@ -6,7 +6,10 @@
   "name": "temp",
   "version": "1.0.0",
   "main": "gulpfile.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "pug": "^3.0.0",
+    "sass": "^1.26.10"
+  },
   "scripts": {
     "dev": "parcel src/pages/*.pug",
     "build": "parcel build src/pages/*.pug"

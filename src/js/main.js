@@ -8,10 +8,8 @@ class App {
 
 class Conversation {
   constructor() {
-    this.messageList = []; // rendered messagelist
-    this.activeCharacters = [];
-    this.activeConversation = [];
-    this.counter = 0;
+    this.root = document.getElementById("conversation");
+    this.scrolled = false;
     this.charactersList = [
       "nes-mario",
       "nes-ash",
@@ -53,9 +51,35 @@ class Conversation {
         `You're going to get kicked.`,
       ],
     ];
+    this.init();
+  }
+  init() {
+    this.messageList = []; // rendered messagelist
+    this.activeCharacters = [];
+    this.activeConversation = [];
+    this.counter = 0;
+    this.setupScroll();
     this.setConvo();
     this.render();
     this.simulateConvo(0);
+  }
+  reset() {
+    this.messageList = []; // rendered messagelist
+    this.activeCharacters = [];
+    this.activeConversation = [];
+    this.counter = 0;
+    this.init();
+  }
+  setupScroll() {
+    addEventListener("scroll", () => {
+      this.scrolled = true;
+    });
+  }
+  updateScroll() {
+  //   console.log('stuff?', this.scrolled)
+  //   if (!this.scrolled) {
+  //     this.root.scrollTop = this.root.scrollHeight;
+  //   }
   }
   setConvo() {
     const spot = Math.floor(Math.random() * this.dialog.length);
@@ -69,7 +93,12 @@ class Conversation {
   }
 
   simulateConvo() {
-    if (this.counter >= this.activeConversation.length - 1) {
+    const convoOver = this.counter >= this.activeConversation.length - 1;
+    if (this.root.childElementCount >= 30 && convoOver) {
+      return;
+    }
+    if (convoOver) {
+      this.reset();
       return;
     }
     const message = this.createMessage(
@@ -123,10 +152,9 @@ class Conversation {
   // determine which character to use
 
   render() {
-    const root = document.getElementById("conversation");
-
     this.messageList.forEach((msg) => {
-      root.appendChild(msg);
+      this.root.prepend(msg);
+      this.updateScroll();
     });
   }
 }
