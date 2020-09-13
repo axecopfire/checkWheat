@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "faker": "^5.1.0",
     "nes.css": "^2.3.0",
     "parcel-bundler": "^1.12.4"
   },
