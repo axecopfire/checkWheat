@@ -58,6 +58,7 @@ export default class Conversation {
     this.activeCharacters = [];
     this.activeConversation = [];
     this.counter = 0;
+    this.root.prepend(document.createElement('hr'))
     this.init();
   }
   setConvo() {
