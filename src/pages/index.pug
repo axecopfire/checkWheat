@@ -97,6 +97,18 @@ block content
         .nes-field
           label(for="message") Tell us something good
           textarea.nes-textarea#message
+        .nes-field
+          label Is this your favorite game?
+            input.nes-radio(type="radio")
+            span Yes
+          label
+            input.nes-radio(type="radio")
+            span No
+        button.nes-btn.is-error(type="reset") Cancel
+        input.nes-btn.is-primary(type="submit" value="Submit")
+
+
+        
 
 
 
