@@ -72,14 +72,32 @@ block content
 
 
     section.nes-container.with-title.is-centered
-      p.title Contact us
-      button.nes-btn.is-primary(type="button" onclick="document.getElementById('dialog-default').showModal();") Email us
+      p.title Find sentience
+      button.nes-btn.is-primary(type="button" onclick="document.getElementById('dialog-default').showModal();") Search
       dialog.nes-dialog#dialog-default
         form(method="dialog")
-          p.title Under construction
-          p We seem to be unable to handle your request...Hmm that's weird
+          p.title The search continues
+          p What a strange thing to say.
           menu.dialog-menu
             button.nes-btn Cancel
+
+    section.contact-form.nes-container.with-title
+      h4.title Contact form
+      form
+        .nes-field
+          label(for="name") Your name
+          input#name.nes-input(type="text")
+        .nes-field
+          label(for="reason") Why are you contacting us?
+          .nes-select
+            select#reason
+              option(value="" disabled selected hidden) select...
+              option I have something nice to say
+              option(disabled) I have some suggestions 
+        .nes-field
+          label(for="message") Tell us something good
+          textarea.nes-textarea#message
+
 
 
 
